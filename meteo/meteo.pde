@@ -1,6 +1,46 @@
+String[] meteoStatus = {"Très nuageux", "Ensoleillé", "Très ensoleillé"};
+class Ville {
+  String nom;
+  int tempMin;
+  int tempMax;
+  String status;
+  int temperature;
+  
+  Ville(String nom, int tempMin, int tempMax) {
+    this.nom = nom;
+    this.tempMin = tempMin;
+    this.tempMax = tempMax;
+    this.status = determineStatus(); // Utilisez les températures min et max pour déterminer le statut
+    this.temperature = getRandomNumber(tempMin, tempMax);
+  }
+
+  // Détermine le statut météorologique en fonction des températures min et max
+  String determineStatus() {
+    if (this.tempMax > 25) {
+      return "Très ensoleillé";
+    } else if (this.tempMax > 15) {
+      return "Ensoleillé";
+    } else {
+      return "Très nuageux";
+    }
+  }
+}
+String semaine[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
+// Liste des villes avec leurs données météo
+Ville[] villes = {
+  new Ville("Ma localisation", 10, 15),
+  new Ville("Casablanca", 8, 18),
+  new Ville("Comps-la-grande-ville", 8, 11),
+  new Ville("Urugne", 7, 13),
+  new Ville("Perpignan", 11, 16),
+  new Ville("Saint-Louis", 20, 30)
+};
+
+Ville villeSelectionnee = villes[0];
+
 void setup() {
-  size(768, 1105); // Taille basée sur la dimension de l'image
-  background(135, 206, 235); // Couleur de fond bleu clair pour un ciel ensoleillé
+  size(720, 900); // Taille basée sur la dimension de l'image
+
 }
 
 void draw() {
@@ -10,59 +50,63 @@ void draw() {
 }
 
 void drawSidebar() {
-  fill(255); // Couleur de fond blanc pour la liste des villes
+// Couleur de fond bleu clair pour un ciel ensoleillé
+  fill(35, 154, 199); 
   noStroke();
-  rect(0, 0, 150, height); // Dessine la barre latérale
+  rect(0, 0, 200, height); // Dessine la barre latérale
   
   // Ajouter des éléments de la liste de villes
   fill(0); // Texte noir
   textSize(14);
-  text("My Location", 10, 30);
-  text("Casablanca", 10, 60);
-  text("Grenoble", 10, 90);
-  text("Paris", 10, 120);
-  // Ajouter d'autres villes ici selon besoin
+    for(int i =0; i < villes.length; i++){
+        text(villes[i].nom, 10, (i+1)*35);
+    }
+  
   
   // Bouton pour ajouter une ville
   fill(200); // Couleur du bouton
   rect(10, height - 60, 130, 40, 20); // Dessine le bouton avec des coins arrondis
   fill(0); // Texte noir pour le "+"
   textSize(32);
-  text("+", 55, height - 25); // Positionne le "+"
+  text("+", (130/2)-5, height - 30); // Positionne le "+"
 }
 
 void drawWeatherPanel() {
+  
   // Panneau d'affichage météo
-  fill(255); // Fond blanc pour la zone de détails
-  rect(160, 0, width - 160, height); // Dessine le panneau d'affichage
+  fill(135, 206, 255); 
+  rect(180, 0, width - 160, height); // Dessine le panneau d'affichage
   
   // Informations météo pour la ville sélectionnée
   fill(0); // Texte noir
-  textSize(30);
-  text("15°C", 180, 50);
   textSize(20);
-  text("Mostly Cloudy", 180, 80);
+  text(villeSelectionnee.nom, 400, 50);
+  textSize(30);
+  text(villeSelectionnee.temperature+"°C", 400, 80);
+  textSize(20);
+  text(villeSelectionnee.status, 400, 110);
   textSize(16);
-  text("H:16° L:10°", 180, 105);
-  
+  text("H:"+villeSelectionnee.tempMax+"°"+ "B:"+villeSelectionnee.tempMin+"°", 400, 140);
+ 
   // Prévisions horaires (exemple statique)
   textSize(14);
-  text("Now", 180, 140);
-  text("18:15", 230, 140);
+  text("Actualisé à :", 400, 200);
+  text(hour()+":"+ minute(), 500, 200);
   // Ajouter d'autres heures et températures
   
   // Prévisions pour les 10 prochains jours (exemple statique)
   textSize(14);
-  fill(0); // Texte noir pour les jours
-  for (int i = 0; i < 10; i++) {
-    int y = 180 + i * 60; // Position verticale de chaque entrée
-    text("Day " + (i + 1), 180, y);
-    if (i % 2 == 0) { // Condition pour alterner entre ensoleillé et nuageux
-      drawSunIcon(240, y - 15);
+ 
+  for (int i = 0; i < semaine.length; i++) {
+    int y = 300 + i * 60; // Position verticale de chaque entrée
+     fill(0); // Texte noir pour les jours
+    text(semaine[i], 200, y);
+    if (getRandomNumber(0, 9) % 2 == 0) { // Condition pour alterner entre ensoleillé et nuageux
+       goodDay(y);
     } else {
-      drawCloudIcon(240, y - 15);
+        badDay(y);
     }
-    // Ajouter les températures min et max ici
+
   }
 }
 
@@ -85,4 +129,36 @@ void drawCloudIcon(float x, float y) {
   ellipse(x, y, 25, 20); // Dessine un nuage
   ellipse(x + 10, y + 5, 25, 20);
   ellipse(x - 10, y + 5, 20, 20);
+}
+
+void badDay(int y){
+      drawCloudIcon(300, y - 15);
+      fill(0);
+      int max = getRandomNumber(0,20);
+      text("H: "+max+"°"+ "B: "+getRandomNumber(max-10, max-7)+"°", 400, y );
+      text("Humidité: "+getRandomNumber(45,80)+"%", 550, y );
+}
+
+void goodDay(int y){
+      drawSunIcon(300, y - 15);
+      fill(0);
+      int max = getRandomNumber(20,30);
+      text("H: "+max+"°"+ "B: "+getRandomNumber(max-10, max-7)+"°", 400, y );
+      text("Humidité: "+getRandomNumber(10,50)+"%", 550, y );
+}
+
+public int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
+}
+
+void mousePressed() {
+  System.out.println("x: "+mouseX+"y: "+mouseY);
+  if (mouseX > 0 && mouseX < 200) { // Zone de la barre latérale
+    int index = (mouseY/35); // Décalage 
+    System.out.println(index);
+    if (index >= 0 && index < villes.length) {
+      villeSelectionnee = villes[index];
+      redraw(); 
+    }
+  }
 }
