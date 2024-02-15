@@ -1,37 +1,45 @@
 import gifAnimation.*;
 Gif gif;
-Gif jeux;
+Gif gif_jeux;
 
+//Variables 
 int state,rick;
 String[] noms; // Tableau pour stocker les noms
 PImage img; // Déclaration de la variable pour l'image
 int x_retour, y_retour, largeur_retour, hauteur_retour,x_start,y_start,diametre_start,x_score,y_score,largeurColonne_score,hauteurLigne_score; // Position et dimensions du bouton retour
-void setup() {
-  size(720, 900);
-  background(220, 220, 231); // Couleur bleu ciel
-  
- gif = new Gif(this, "rick.gif"); // Charger le GIF
- gif.play(); // Lire le GIF
-  // Initialisation du tableau de noms (peut être rempli plus tard)
-  noms = new String[]{"Puck-Man", "Space Outvider", "Monkey King", "Marius Brother", "The History of Laink", "Doomed", "Wood stick Liquid", "Solidaire"};
-  //x_retour = 50; // Position horizontale du bouton
- // y_retour = 800; // Position verticale du bouton
-//largeur_retour = 140; // Largeur du bouton
-  //hauteur_retour = 70; // Hauteur du bouton
-  x_start =525; // Position horizontale du centre du bouton
-  y_start = 525; // Position verticale du centre du bouton
-  diametre_start = 150; // Diamètre du bouton
-  
-  int x_score = 50; // Position horizontale du tableau
-  int y_score = 800; // Position verticale du tableau
-  int largeurColonne_score = 200; // Largeur de chaque colonne
-  int hauteurLigne_score = 50; // Hauteur de chaque ligne
-  
-
-}
 
 
-void draw() {
+
+public class FenetreJeux extends PApplet {
+    // Cette méthode est à appeler une fois au début
+    public void settings() {
+        size(720, 900);
+    }
+
+
+    public void setup() {
+        //background(220, 220, 231); // Couleur bleu ciel
+        
+        gif = new Gif(this, "rick.gif"); // Charger le GIF
+        gif.play(); // Lire le GIF
+        // Initialisation du tableau de noms (peut être rempli plus tard)
+        noms = new String[]{"Puck-Man", "Space Outvider", "Monkey King", "Marius Brother", "The History of Laink", "Doomed", "Wood stick Liquid", "Solidaire"};
+        //x_retour = 50; // Position horizontale du bouton
+         // y_retour = 800; // Position verticale du bouton
+        //largeur_retour = 140; // Largeur du bouton
+        //hauteur_retour = 70; // Hauteur du bouton
+        x_start =525; // Position horizontale du centre du bouton
+        y_start = 525; // Position verticale du centre du bouton
+        diametre_start = 150; // Diamètre du bouton
+        
+        int x_score = 50; // Position horizontale du tableau
+        int y_score = 800; // Position verticale du tableau
+        int largeurColonne_score = 200; // Largeur de chaque colonne
+        int hauteurLigne_score = 50; // Hauteur de chaque ligne
+    }
+
+    // La boucle de dessin pour le jeu
+    public void draw() {
   int x = 50; // Position horizontale du tableau
   int y = 50; // Position verticale du tableau
   int largeur = width - 2 * x; // Largeur du tableau
@@ -63,7 +71,7 @@ void draw() {
   fill(0); // Couleur noire pour le texte du titre
   textAlign(CENTER, CENTER);
   textSize(24);
-  text("Mini-Jeux", width / 2, y - 18); // Titre 2 pixels au-dessus du tableau
+  text("Mini-gif_jeux", width / 2, y - 18); // Titre 2 pixels au-dessus du tableau
   fill(255);
   // Affichage des rectangles encadrant chaque nom
   for (int i = 0; i < noms.length; i++) {
@@ -88,8 +96,8 @@ void draw() {
   
   switch (state) {
     case 1:
-      jeux = new Gif(this, "1.gif");
-      image(jeux, 60, 420, 280, 180);
+      gif_jeux = new Gif(this, "1.gif");
+      image(gif_jeux, 60, 420, 280, 180);
       //img = loadImage("1.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       //image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
       if(rick == 1){
@@ -98,8 +106,8 @@ void draw() {
       }
       break;
     case 2:
-      jeux = new Gif(this, "2.gif");
-      image(jeux, 60, 420, 280, 180);
+      gif_jeux = new Gif(this, "2.gif");
+      image(gif_jeux, 60, 420, 280, 180);
       //img = loadImage("2.png"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       //image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
       if(rick == 1){
@@ -160,8 +168,7 @@ void draw() {
   }
 
 }
-
-void mouseClicked() {
+    public void mouseClicked() {
   int x = 50; // Position horizontale du tableau
   int y = 50; // Position verticale du tableau
   int largeur = width - 2 * x; // Largeur du tableau
@@ -174,10 +181,8 @@ void mouseClicked() {
     // Le bouton "Start" a été cliqué
     println("Bouton Start cliqué");
     rick = 1;
-    // Ajoutez ici le code que vous souhaitez exécuter lorsqu'on clique sur le bouton "Start"
+
   }
-  
-  
   
   // Vérifier si la souris est cliquée dans une des cases du tableau
   for (int i = 0; i < noms.length; i++) {
@@ -186,11 +191,9 @@ void mouseClicked() {
       println("Case " + (i + 1) + " cliquée. Nom: " + noms[i]);
       state = (i+1);
       rick = 0;
-      // Ajoutez ici le code que vous souhaitez exécuter lorsqu'une case est cliquée
+
     }
   }
-  //if (mouseX > x_retour && mouseX < x_retour + largeur_retour && mouseY > y_retour && mouseY < y_retour + hauteur_retour) {
-    // Le bouton "Retour" a été cliqué
-  //  println("Bouton Retour cliqué");
-  //}
+
+}
 }

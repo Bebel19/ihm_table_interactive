@@ -1,4 +1,61 @@
+//Variables
 String[] meteoStatus = {"Très nuageux", "Ensoleillé", "Très ensoleillé"};
+String semaine[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
+// Liste des villes avec leurs données météo
+Ville[] villes = {
+  new Ville("Ma localisation", 10, 15),
+  new Ville("Casablanca", 8, 18),
+  new Ville("Comps-la-grande-ville", 8, 11),
+  new Ville("Urugne", 7, 13),
+  new Ville("Perpignan", 11, 16),
+  new Ville("Saint-Louis", 20, 30)
+};
+Ville villeSelectionnee = villes[0];
+
+
+//PApplet
+public class FenetreMeteo extends PApplet {
+    public void settings() {
+        size(720, 900);
+        
+    }
+
+
+    public void draw() {
+      drawSidebar();
+      drawWeatherPanel();
+      noLoop(); // Arrête la boucle draw après la première itération
+}
+    public void mousePressed() {
+        if (mouseX > 0 && mouseX < 200) { // Zone de la barre latérale
+          int itemHeight = 35; // Hauteur d'un élément (nom de ville + espace)
+          int tolerance = itemHeight/2; // Tolérance en pixels au-dessus et en dessous de chaque élément
+      
+          // Calcul de l'index en tenant compte de la tolérance
+          int index = -1;
+          for (int i = 0; i < villes.length; i++) {
+            int itemTop = i * itemHeight - tolerance; // Début de l'élément avec tolérance
+            int itemBottom = itemTop + itemHeight + tolerance * 2; // Fin de l'élément avec tolérance
+      
+            if (mouseY >= itemTop && mouseY <= itemBottom) {
+              index = i;
+              break; // Arrête la boucle une fois l'index trouvé
+            }
+          }
+      
+      
+          if (index >= 0) {
+            villeSelectionnee = villes[index];
+            redraw();
+          }
+        }
+      }
+}
+
+
+
+
+
 class Ville {
   String nom;
   int tempMin;
@@ -25,29 +82,13 @@ class Ville {
     }
   }
 }
-String semaine[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"};
-// Liste des villes avec leurs données météo
-Ville[] villes = {
-  new Ville("Ma localisation", 10, 15),
-  new Ville("Casablanca", 8, 18),
-  new Ville("Comps-la-grande-ville", 8, 11),
-  new Ville("Urugne", 7, 13),
-  new Ville("Perpignan", 11, 16),
-  new Ville("Saint-Louis", 20, 30)
-};
 
-Ville villeSelectionnee = villes[0];
 
-void setup() {
-  size(720, 900); // Taille basée sur la dimension de l'image
 
-}
 
-void draw() {
-  drawSidebar();
-  drawWeatherPanel();
-  noLoop(); // Arrête la boucle draw après la première itération
-}
+
+
+
 
 void drawSidebar() {
 // Couleur de fond bleu clair pour un ciel ensoleillé
@@ -149,29 +190,4 @@ void goodDay(int y){
 
 public int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
-}
-
-void mousePressed() {
-  if (mouseX > 0 && mouseX < 200) { // Zone de la barre latérale
-    int itemHeight = 35; // Hauteur d'un élément (nom de ville + espace)
-    int tolerance = itemHeight/2; // Tolérance en pixels au-dessus et en dessous de chaque élément
-
-    // Calcul de l'index en tenant compte de la tolérance
-    int index = -1;
-    for (int i = 0; i < villes.length; i++) {
-      int itemTop = i * itemHeight - tolerance; // Début de l'élément avec tolérance
-      int itemBottom = itemTop + itemHeight + tolerance * 2; // Fin de l'élément avec tolérance
-
-      if (mouseY >= itemTop && mouseY <= itemBottom) {
-        index = i;
-        break; // Arrête la boucle une fois l'index trouvé
-      }
-    }
-
-
-    if (index >= 0) {
-      villeSelectionnee = villes[index];
-      redraw();
-    }
-  }
 }

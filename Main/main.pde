@@ -9,9 +9,9 @@ PImage paiement;
 int selection =0; 
 
 void setup(){
-  background(255); 
   size(900,300); 
-  
+  background(255); 
+ 
   fill(0);
   textSize(20);
   text("Table 2", 400, 20);
@@ -70,15 +70,24 @@ void mousePressed(){
   }
     //Vérifier si la souris est sur le bouton Discussion 
   if (mouseX > 140 && mouseX < 240 && mouseY > 100 && mouseY < 220) {
-    selection = 2;
+    selection = 2; // Supposons que 2 représente la messagerie
+    FenetreMessagerie fenetreMessagerie = new FenetreMessagerie();
+    String[] args = {"Table Messagerie"};
+    PApplet.runSketch(args, fenetreMessagerie);
   }
     //Vérifier si la souris est sur le bouton Meteo
   if (mouseX > 260 && mouseX < 360 && mouseY > 100 && mouseY < 220) {
     selection = 3; 
+    FenetreMeteo fenetreMeteo = new FenetreMeteo();
+    String[] args = {"Fenetre Meteo"};
+    PApplet.runSketch(args, fenetreMeteo);
   }
     //Vérifier si la souris est sur le bouton Jeux
   if (mouseX > 380 && mouseX < 480 && mouseY > 100 && mouseY < 220) {
-    selection = 4; 
+    selection = 4; // Sélection du jeu
+    FenetreJeux fenetreJeux = new FenetreJeux();
+    String[] args = {"Fenetre Jeux"};
+    PApplet.runSketch(args, fenetreJeux);
   }
     //Vérifier si la souris est sur le bouton Service
   if (mouseX > 500 && mouseX < 600 && mouseY > 100 && mouseY < 220) {
@@ -86,6 +95,9 @@ void mousePressed(){
   }
     //Vérifier si la souris est sur le bouton Parametres
   if (mouseX > 620 && mouseX < 720 && mouseY > 100 && mouseY < 220) {
-    selection = 6; 
+    selection = 6; // Supposons que 6 représente les paramètres
+    FenetreParametres fenetreParametres = new FenetreParametres();
+    String[] args = {"Table Paramètres"};
+    PApplet.runSketch(args, fenetreParametres);
   }
 }
