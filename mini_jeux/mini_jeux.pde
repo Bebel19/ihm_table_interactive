@@ -1,11 +1,17 @@
-int state;
+import gifAnimation.*;
+Gif gif;
+
+int currentFrame = 0;
+int state,rick;
 String[] noms; // Tableau pour stocker les noms
 PImage img; // Déclaration de la variable pour l'image
-int x_retour, y_retour, largeur_retour, hauteur_retour,x_start,y_start,diametre_start; // Position et dimensions du bouton retour
+int x_retour, y_retour, largeur_retour, hauteur_retour,x_start,y_start,diametre_start,x_score,y_score,largeurColonne_score,hauteurLigne_score; // Position et dimensions du bouton retour
 void setup() {
   size(720, 900);
   background(220, 220, 231); // Couleur bleu ciel
-
+  
+ gif = new Gif(this, "rick.gif"); // Charger le GIF
+ gif.play(); // Lire le GIF
   // Initialisation du tableau de noms (peut être rempli plus tard)
   noms = new String[]{"Puck-Man", "Space Outvider", "Monkey King", "Marius Brother", "The History of Laink", "Doomed", "Wood stick Liquid", "Solidaire"};
   //x_retour = 50; // Position horizontale du bouton
@@ -15,6 +21,13 @@ void setup() {
   x_start =525; // Position horizontale du centre du bouton
   y_start = 525; // Position verticale du centre du bouton
   diametre_start = 150; // Diamètre du bouton
+  
+  int x_score = 50; // Position horizontale du tableau
+  int y_score = 800; // Position verticale du tableau
+  int largeurColonne_score = 200; // Largeur de chaque colonne
+  int hauteurLigne_score = 50; // Hauteur de chaque ligne
+  
+
 }
 
 
@@ -63,7 +76,6 @@ void draw() {
   rect(50, 410, 300, 200); // Rectangle aux coordonnées (50, 50) et dimensions 300x200
   
 
-  
   fill(0); // Couleur blanche pour le texte des noms
   textAlign(CENTER, CENTER);
   textSize(20);
@@ -76,36 +88,69 @@ void draw() {
   
   switch (state) {
     case 1:
+      
       img = loadImage("1.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 2:
       img = loadImage("2.png"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 3:
       img = loadImage("3.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 4:
       img = loadImage("4.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 5:
       img = loadImage("5.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 6:
       img = loadImage("6.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 7:
       img = loadImage("7.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     case 8:
       img = loadImage("8.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
       image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      if(rick == 1){
+        background(255);
+        image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
+      }
       break;
     default:
       
@@ -125,6 +170,7 @@ void mouseClicked() {
   if (distance < diametre_start / 2) {
     // Le bouton "Start" a été cliqué
     println("Bouton Start cliqué");
+    rick = 1;
     // Ajoutez ici le code que vous souhaitez exécuter lorsqu'on clique sur le bouton "Start"
   }
   
@@ -136,11 +182,12 @@ void mouseClicked() {
       // La case a été cliquée
       println("Case " + (i + 1) + " cliquée. Nom: " + noms[i]);
       state = (i+1);
+      rick = 0;
       // Ajoutez ici le code que vous souhaitez exécuter lorsqu'une case est cliquée
     }
   }
-  if (mouseX > x_retour && mouseX < x_retour + largeur_retour && mouseY > y_retour && mouseY < y_retour + hauteur_retour) {
+  //if (mouseX > x_retour && mouseX < x_retour + largeur_retour && mouseY > y_retour && mouseY < y_retour + hauteur_retour) {
     // Le bouton "Retour" a été cliqué
-    println("Bouton Retour cliqué");
-  }
+  //  println("Bouton Retour cliqué");
+  //}
 }
