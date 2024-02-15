@@ -1,4 +1,6 @@
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 CARTE_STATS carteStats;
 CATEG_CARTE categCarte;
@@ -51,6 +53,8 @@ void setup() {
  
  textSize(20);
  tailleBtn=(height-20)/10;
+ 
+ DecimalFormatSymbols separateurDecimal = new DecimalFormatSymbols(Locale.US);
 
 }
 
@@ -58,6 +62,7 @@ void affichageTexteTabule(String texte, int xPosMin, int yPos, int xPosMax, colo
   fill(couleur);
   String [] texteScinde=texte.split("\t");
   textAlign(CENTER);
+  System.out.println(texteScinde[0]);
   text(texteScinde[0], xPosMin, yPos, xPosMax, yPos+50);
   text(texteScinde[1], xPosMin+tailleTab, yPos, xPosMax+tailleTab, yPos+50);
 
@@ -218,8 +223,8 @@ void ongletsStat(){
 void resumee (List<String> selection){
    String texteResumeeQRCode="";
    String textePrix="";
-   int prixTotal=0;
-   int prixItem=0;
+   float prixTotal=0;
+   float prixItem=0;
   
   fill(fondOnglet);
   rect(0,40,140, height-100);
@@ -257,9 +262,14 @@ void resumee (List<String> selection){
    }
     texteResumeeQRCode+=selection.get(i).substring(0, selection.get(i).length() - 1)+" EUR";
     affichageTexteTabule(selection.get(i), -100,150+i*espaceLigne, width-20,couleurTexte);
-    textePrix=selection.get(i).split("\t");
-    prixItem=textePrix.substring(0, textePrix.size()-1);
+    
+    textePrix=selection.get(i);
+    textePrix=(textePrix.split("\t")[1]);
+    prixItem=float(textePrix.substring(0, textePrix.length()-1));
+    prixTotal+=prixItem;
  }
+ text(String.format("%.02f",prixTotal), width/2-10+tailleTab,height-225);
+ textAlign(LEFT);
    
    QRCode=writeQR(texteResumeeQRCode);
    image(QRCode, width/2-10,height-130);
