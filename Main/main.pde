@@ -34,59 +34,58 @@ void draw(){
   noFill(); 
   
   //Afficher les images 
-  image(menu, 60, 120, 70, 70); 
-  image(discu, 160, 120, 70, 70); 
-  image(meteo, 260, 120, 70, 70); 
-  image(jeux, 360, 120, 70, 70); 
-  image(service, 460, 120, 70, 70); 
-  image(parametres, 560, 120, 70, 70);
-  image(paiement, 650 ,100, 170, 170);  
+  image(menu, 20, 120, 100, 100); 
+  image(discu, 140, 120, 100, 100); 
+  image(meteo, 260, 120, 100, 100); 
+  image(jeux, 380, 120, 100, 100); 
+  image(service, 500, 120, 100, 100); 
+  image(parametres, 620, 120, 100, 100);
+  image(paiement, 725 ,100, 170, 170);  
   
   // Affichage des rectangles
-  rect(60, 100, 70, 90);
-  rect(160, 100, 70, 90);
-  rect(260, 100, 70, 90);
-  rect(360, 100, 70, 90);
-  rect(460, 100, 70, 90);
-  rect(560, 100, 70, 90);
+  rect(20, 100, 100, 120);
+  rect(140, 100, 100, 120);
+  rect(260, 100, 100, 120);
+  rect(380, 100, 100, 120);
+  rect(500, 100, 100, 120);
+  rect(620, 100, 100, 120);
   
   //Affichage des noms
   fill(0);
   textSize(15);
-  text("Menu", 75, 115);
-  text("Discussion", 162, 115);
-  text("Meteo", 275, 115);
-  text("Jeux", 375, 115);
-  text("Service", 475, 115);
-  text("Peiment", 570, 115);
+  text("Menu", 55, 115);
+  text("Discussion", 160, 115);
+  text("Meteo", 290, 115);
+  text("Jeux", 415, 115);
+  text("Service", 525, 115);
+  text("Paiement", 640, 115);
 
 println(selection); 
 }
 
-
 void mousePressed(){
   //Vérifier si la souris est sur le bouton Menu 
-  if (mouseX > 60 && mouseX < 130 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 20 && mouseX < 120 && mouseY > 100 && mouseY < 220) {
     selection = 1;
   }
     //Vérifier si la souris est sur le bouton Discussion 
-  if (mouseX > 160 && mouseX < 230 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 140 && mouseX < 240 && mouseY > 100 && mouseY < 220) {
     selection = 2;
   }
     //Vérifier si la souris est sur le bouton Meteo
-  if (mouseX > 260 && mouseX < 330 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 260 && mouseX < 360 && mouseY > 100 && mouseY < 220) {
     selection = 3; 
   }
     //Vérifier si la souris est sur le bouton Jeux
-  if (mouseX > 360 && mouseX < 430 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 380 && mouseX < 480 && mouseY > 100 && mouseY < 220) {
     selection = 4; 
   }
     //Vérifier si la souris est sur le bouton Service
-  if (mouseX > 460 && mouseX < 530 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 500 && mouseX < 600 && mouseY > 100 && mouseY < 220) {
     selection = 5; 
   }
     //Vérifier si la souris est sur le bouton Parametres
-  if (mouseX > 560 && mouseX < 630 && mouseY > 100 && mouseY < 190) {
+  if (mouseX > 620 && mouseX < 720 && mouseY > 100 && mouseY < 220) {
     selection = 6; 
   }
 }
