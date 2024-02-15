@@ -1,6 +1,5 @@
 import java.awt.image.BufferedImage;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
+
 
 CARTE_STATS carteStats;
 CATEG_CARTE categCarte;
@@ -41,10 +40,12 @@ public enum CATEG_STATS {
   List<String> selection = new ArrayList<>();
   
   PImage QRCode;
+  
+  String[] listePlatJ={"Plat du jour\t5,00€"};
 
 void setup() {
  size(900,720);
- background(bg);;
+ background(bg);
  
  carteStats=CARTE_STATS.CARTE;
  categCarte=CATEG_CARTE.PLATJ;
@@ -292,7 +293,7 @@ void draw(){
        case PLATJ:
         background(bg);
        ongletsCarte();
-       affichageTexte("Plat du jour\t5,00€", 200,70,250, selection);
+       affichageTexte(listePlatJ[0], 200,70,250, selection);
        
        break;
        
