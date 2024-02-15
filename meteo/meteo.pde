@@ -152,7 +152,6 @@ public int getRandomNumber(int min, int max) {
 }
 
 void mousePressed() {
-  System.out.println("x: " + mouseX + " y: " + mouseY);
   if (mouseX > 0 && mouseX < 200) { // Zone de la barre latérale
     int itemHeight = 35; // Hauteur d'un élément (nom de ville + espace)
     int tolerance = itemHeight/2; // Tolérance en pixels au-dessus et en dessous de chaque élément
@@ -169,7 +168,6 @@ void mousePressed() {
       }
     }
 
-    System.out.println(index);
 
     if (index >= 0) {
       villeSelectionnee = villes[index];
