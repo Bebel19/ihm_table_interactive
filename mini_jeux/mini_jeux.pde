@@ -8,10 +8,10 @@ void setup() {
 
   // Initialisation du tableau de noms (peut être rempli plus tard)
   noms = new String[]{"Puck-Man", "Space Outvider", "Monkey King", "Marius Brother", "The History of Laink", "Doomed", "Wood stick Liquid", "Solidaire"};
-  x_retour = 50; // Position horizontale du bouton
-  y_retour = 800; // Position verticale du bouton
-  largeur_retour = 140; // Largeur du bouton
-  hauteur_retour = 70; // Hauteur du bouton
+  //x_retour = 50; // Position horizontale du bouton
+ // y_retour = 800; // Position verticale du bouton
+//largeur_retour = 140; // Largeur du bouton
+  //hauteur_retour = 70; // Hauteur du bouton
   x_start =525; // Position horizontale du centre du bouton
   y_start = 525; // Position verticale du centre du bouton
   diametre_start = 150; // Diamètre du bouton
@@ -37,13 +37,13 @@ void draw() {
   
   
   // affichage bouton retour
-  fill(255); // Couleur pour le bouton retour
-  rect(x_retour, y_retour, largeur_retour, hauteur_retour); // Rectangle noir pour le bouton retour
+  //fill(255); // Couleur pour le bouton retour
+  //rect(x_retour, y_retour, largeur_retour, hauteur_retour); // Rectangle noir pour le bouton retour
   // Affichage du texte "Retour" au centre du bouton
-  fill(0); // Couleur blanche pour le texte
-  textAlign(CENTER, CENTER);
-  textSize(20);
-  text("Retour", x_retour + largeur_retour / 2, y_retour + hauteur_retour / 2);
+  //fill(0); // Couleur blanche pour le texte
+  //textAlign(CENTER, CENTER);
+  //textSize(20);
+  //text("Retour", x_retour + largeur_retour / 2, y_retour + hauteur_retour / 2);
 
 
   // Affichage du titre
