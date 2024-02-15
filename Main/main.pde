@@ -1,29 +1,86 @@
-PImage menu; 
-PImage discu; 
-PImage meteo; 
-PImage jeux; 
-PImage service; 
-PImage parametres; 
-PImage paiement; 
+import processing.core.PApplet;
+import processing.core.PImage;
+import gifAnimation.*;
 
-int selection =0; 
+// Declaration pour les fenetres secondaires
+LaCarte carte;
+Messagerie messagerie;
+Meteo meteo;
+Jeux jeux;
+Parametres parametres;
+
+// bool pour que les fentres secondaires ne s'ouvrent q'un fois
+
+// Images de l'Acueill
+PImage menuIcone; 
+PImage discuIcone; 
+PImage meteoIcone; 
+PImage jeuxIcone; 
+PImage serviceIcone; 
+PImage parametresIcone; 
+PImage paiementIcone; 
+
+// Images des Parametres
+PImage retourParametres; 
+PImage lumParametres;
+
+// Image de Messagerie
+PImage retourMsg;
+
+// Images de Jeux
+PImage jeux3;
+PImage jeux4;
+PImage jeux5;
+PImage jeux6;
+PImage jeux7;
+PImage jeux8;
+
+// GIF Jeux
+Gif gif;
+Gif gifJeux1;
+Gif gifJeux2;
+
+//int selectionInt =0; 
 
 void setup(){
   size(900,300); 
   background(255); 
- 
+
+  
   fill(0);
   textSize(20);
   text("Table 2", 400, 20);
   
   //Charger les images
-  menu = loadImage("./Images/menu.png");
-  discu = loadImage("./Images/discussion.jpg"); 
-  meteo = loadImage("./Images/meteo.jpg"); 
-  jeux = loadImage("./Images/jeux.png"); 
-  service = loadImage("./Images/service.jpg"); 
-  parametres =  loadImage("./Images/parametres.png"); 
-  paiement =  loadImage("./Images/paiement.png"); 
+  menuIcone = loadImage("./Images/menu.png");
+  discuIcone = loadImage("./Images/discussion.jpg"); 
+  meteoIcone = loadImage("./Images/meteo.jpg"); 
+  jeuxIcone = loadImage("./Images/jeux.png"); 
+  serviceIcone = loadImage("./Images/service.jpg"); 
+  parametresIcone =  loadImage("./Images/parametres.png"); 
+  paiementIcone =  loadImage("./Images/paiement.png"); 
+  
+  retourParametres = loadImage("./Images/parametres.png");
+  lumParametres = loadImage("./Images/luminosite.png"); 
+  retourMsg = loadImage("./Images/back.png");
+  
+  jeux3 = loadImage("./Images/3.jpg");
+  jeux4 = loadImage("./Images/4.jpg");
+  jeux5 = loadImage("./Images/5.jpg");
+  jeux6 = loadImage("./Images/6.jpg");
+  jeux7 = loadImage("./Images/7.jpg");
+  jeux8 = loadImage("./Images/8.jpg");
+  
+  gif = new Gif(this, "./Images/rick.gif"); // Charger le GIF
+  gifJeux1 = new Gif(this, "./Images/1.gif");
+  gifJeux2 = new Gif(this, "./Images/2.gif");
+  
+  carte = new LaCarte();
+  messagerie = new Messagerie(); 
+  meteo = new Meteo();
+  jeux = new Jeux();
+  parametres = new Parametres();
+       
   
 }
 
@@ -34,13 +91,13 @@ void draw(){
   noFill(); 
   
   //Afficher les images 
-  image(menu, 20, 120, 100, 100); 
-  image(discu, 140, 120, 100, 100); 
-  image(meteo, 260, 120, 100, 100); 
-  image(jeux, 380, 120, 100, 100); 
-  image(service, 500, 120, 100, 100); 
-  image(parametres, 620, 120, 100, 100);
-  image(paiement, 725 ,100, 170, 170);  
+  image(menuIcone, 20, 120, 100, 100); 
+  image(discuIcone, 140, 120, 100, 100); 
+  image(meteoIcone, 260, 120, 100, 100); 
+  image(jeuxIcone, 380, 120, 100, 100); 
+  image(serviceIcone, 500, 120, 100, 100); 
+  image(parametresIcone, 620, 120, 100, 100);
+  image(paiementIcone, 725 ,100, 170, 170);  
   
   // Affichage des rectangles
   rect(20, 100, 100, 120);
@@ -60,44 +117,37 @@ void draw(){
   text("Service", 525, 115);
   text("Paiement", 640, 115);
 
-println(selection); 
+
 }
 
 void mousePressed(){
   //Vérifier si la souris est sur le bouton Menu 
-  if (mouseX > 20 && mouseX < 120 && mouseY > 100 && mouseY < 220) {
-    selection = 1;
+  if (mouseX > 20 && mouseX < 120 && mouseY > 100 && mouseY < 220 && carte==null) {
+    //selectionInt = 1;
+    PApplet.runSketch(new String[]{"Carte"}, carte);
   }
     //Vérifier si la souris est sur le bouton Discussion 
   if (mouseX > 140 && mouseX < 240 && mouseY > 100 && mouseY < 220) {
-    selection = 2; // Supposons que 2 représente la messagerie
-    FenetreMessagerie fenetreMessagerie = new FenetreMessagerie();
-    String[] args = {"Table Messagerie"};
-    PApplet.runSketch(args, fenetreMessagerie);
+    //selectionInt = 2;
+     PApplet.runSketch(new String[]{"Messagerie"}, messagerie);
   }
     //Vérifier si la souris est sur le bouton Meteo
-  if (mouseX > 260 && mouseX < 360 && mouseY > 100 && mouseY < 220) {
-    selection = 3; 
-    FenetreMeteo fenetreMeteo = new FenetreMeteo();
-    String[] args = {"Fenetre Meteo"};
-    PApplet.runSketch(args, fenetreMeteo);
+  if (mouseX > 260 && mouseX < 360 && mouseY > 100 && mouseY < 220 && meteo==null) {
+   // selectionInt = 3;
+    PApplet.runSketch(new String[]{"Meteo"}, meteo);
   }
     //Vérifier si la souris est sur le bouton Jeux
   if (mouseX > 380 && mouseX < 480 && mouseY > 100 && mouseY < 220) {
-    selection = 4; // Sélection du jeu
-    FenetreJeux fenetreJeux = new FenetreJeux();
-    String[] args = {"Fenetre Jeux"};
-    PApplet.runSketch(args, fenetreJeux);
+    //selectionInt = 4; 
+    PApplet.runSketch(new String[]{"Jeux"}, jeux);
   }
     //Vérifier si la souris est sur le bouton Service
   if (mouseX > 500 && mouseX < 600 && mouseY > 100 && mouseY < 220) {
-    selection = 5; 
+    //selectionInt = 5; 
   }
     //Vérifier si la souris est sur le bouton Parametres
   if (mouseX > 620 && mouseX < 720 && mouseY > 100 && mouseY < 220) {
-    selection = 6; // Supposons que 6 représente les paramètres
-    FenetreParametres fenetreParametres = new FenetreParametres();
-    String[] args = {"Table Paramètres"};
-    PApplet.runSketch(args, fenetreParametres);
+    //selectionInt = 6;
+     PApplet.runSketch(new String[]{"Parametres"}, parametres);
   }
 }
