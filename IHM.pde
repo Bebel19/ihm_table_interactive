@@ -42,6 +42,11 @@ public enum CATEG_STATS {
   PImage QRCode;
   
   String[] listePlatJ={"Plat du jour\t5,00€"};
+  String[] listeEntrees={"Melon\t2,50€", "Jambon blanc\t3,00€", "Jambon du pays\t3,00€", "Salade\t1,00€", "Tomates\t2,00€"};
+  String[] listePlats={"Plat1\t10,00€", "Plat2\t12,00€", "Plat3\t16,00€", "Plat4\t15,00€", "Plat5\t13,25€"};
+  String[] listeDesserts={"Dessert1\t10,00€", "Dessert2\t8,00€", "Dessert3\t5,00€", "Dessert4\t7,00€", "Dessert5\t11,00€"};
+  String[] listeBoissons={"Boisson1\t2,00€", "Boisson2\t5,00€", "Boisson3\t1,00€", "Boisson4\t0,50€", "Boisson5\t0,75€"};
+
 
 void setup() {
  size(900,720);
@@ -293,7 +298,9 @@ void draw(){
        case PLATJ:
         background(bg);
        ongletsCarte();
-       affichageTexte(listePlatJ[0], 200,70,250, selection);
+       for (int i=0; i<listePlatJ.length;i++){
+       affichageTexte(listePlatJ[i], 200,(i+1)*espaceLigne,250, selection);
+       }
        
        break;
        
@@ -301,11 +308,9 @@ void draw(){
         background(bg);
         ongletsCarte();
        
-       affichageTexte("Melon\t2,50€", 200,70, 250, selection);
-       affichageTexte("Jambon blanc\t3,00€", 200,70+70, 250, selection);
-       affichageTexte("Jambon du pays\t3,00€", 200,70+70*2,250, selection);
-       affichageTexte("Salade\t1,00€", 200,70+70*3,250, selection);
-       affichageTexte("Tomates\t2,00€", 200,70+70*4,250, selection);
+      for (int i=0; i<listeEntrees.length;i++){
+        affichageTexte(listeEntrees[i], 200,(i+1)*espaceLigne,250, selection);
+       }
        
        /*
        affichageTexte("Entree6", 200,70+70*5, selection);
@@ -322,11 +327,9 @@ void draw(){
         background(bg);
         ongletsCarte();
         
-       affichageTexte("Plat1\t10,00€", 200,70,250, selection);
-       affichageTexte("Plat2\t12,00€", 200,70+70,250, selection);
-       affichageTexte("Plat3\t16,00€", 200,70+70*2,250, selection);
-       affichageTexte("Plat4\t15,00€", 200,70+70*3, 250, selection);
-       affichageTexte("Plat5\t13,25€", 200,70+70*4, 250,selection);
+       for (int i=0; i<listePlats.length;i++){
+         affichageTexte(listePlats[i], 200,(i+1)*espaceLigne,250, selection);
+       }
         
        
        break;
@@ -335,11 +338,9 @@ void draw(){
         background(bg);
         ongletsCarte();
         
-       affichageTexte("Dessert1\t10,00€", 200,70,250, selection);
-       affichageTexte("Dessert2\t8,00€", 200,70+70,250, selection);
-       affichageTexte("Dessert3\t5,00€", 200,70+70*2, 250, selection);
-       affichageTexte("Dessert4\t7,00€", 200,70+70*3,250, selection);
-       affichageTexte("Dessert5\t11,00€", 200,70+70*4,250, selection);
+       for (int i=0; i<listeDesserts.length;i++){
+         affichageTexte(listeDesserts[i], 200,(i+1)*espaceLigne,250, selection);
+       }
        
        break;
        
@@ -347,11 +348,9 @@ void draw(){
        background(bg);
        ongletsCarte();
        
-       affichageTexte("Boisson1\t2,00€", 200,70, 250, selection);
-       affichageTexte("Boisson2\t5,00€", 200,70+70, 250, selection);
-       affichageTexte("Boisson3\t1,00€", 200,70+70*2, 250, selection);
-       affichageTexte("Boisson4\t0,50€", 200,70+70*3, 250, selection);
-       affichageTexte("Boisson5\t0,75€", 200,70+70*4, 250, selection);
+       for (int i=0; i<listeBoissons.length;i++){
+         affichageTexte(listeBoissons[i], 200,(i+1)*espaceLigne,250, selection);
+       }
        
        break;
        
@@ -553,112 +552,82 @@ void selectionItem(String texteItem){
      break;
    }
    
-   // Selection et deselection d'item
-   if (categCarte==CATEG_CARTE.PLATJ && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
-     selectionItem("Plat du jour\t5,00€");
-      }
    
-   else if (categCarte==CATEG_CARTE.ENTREES && mouseY>=-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
-        selectionItem("Melon\t2,50€");
-        
+   // Selection et deselection d'item
+   int itemTop; // Début de l'élément avec tolérance
+   int itemBottom; // Fin de l'élément avec tolérance
+   int tolerance=20;
+   int index=-1;
+   
+   if (categCarte==CATEG_CARTE.PLATJ && mouseX<=735 && mouseX>=200-tolerance && carteStats!=CARTE_STATS.RESUMEE){
+     
+     for (int i = 0; i < listePlatJ.length; i++) {
+      itemTop = i * espaceLigne - tolerance; // Début de l'élément avec tolérance
+      itemBottom = itemTop + espaceLigne + tolerance*2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
       }
+    }
+    selectionItem(listePlatJ[index]);
+    }
+  
+   
+   else if (categCarte==CATEG_CARTE.ENTREES && mouseX<=735 && mouseX>=200-tolerance && carteStats!=CARTE_STATS.RESUMEE){
+     
+     for (int i = 0; i < listeEntrees.length; i++) {
+      itemTop = i * espaceLigne - tolerance; // Début de l'élément avec tolérance
+      itemBottom = itemTop + espaceLigne + tolerance*2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
+      }
+    }
+    selectionItem(listeEntrees[index]);
+    }
       
-     else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Jambon blanc\t3,00€");
+   else if (categCarte==CATEG_CARTE.PLATS && mouseX<=735 && mouseX>=200-tolerance && carteStats!=CARTE_STATS.RESUMEE){
+     
+     for (int i = 0; i < listePlats.length; i++) {
+      itemTop = i * espaceLigne - tolerance; // Début de l'élément avec tolérance
+      itemBottom = itemTop + espaceLigne + tolerance*2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
+      }
+    }
+    selectionItem(listePlats[index]);
+    }
       
-        
+   else if (categCarte==CATEG_CARTE.DESSERTS && mouseX<=735 && mouseX>=200-tolerance && carteStats!=CARTE_STATS.RESUMEE){
+     
+     for (int i = 0; i < listeDesserts.length; i++) {
+      itemTop = i * espaceLigne - tolerance; // Début de l'élément avec tolérance
+      itemBottom = itemTop + espaceLigne + tolerance*2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
       }
+    }
+    selectionItem(listeDesserts[index]);
+    }
       
-      else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Jambon du pays\t3,00€");
-       
+    else if(categCarte==CATEG_CARTE.BOISSONS && mouseX<=735 && mouseX>=200-tolerance && carteStats!=CARTE_STATS.RESUMEE){
+     
+     for (int i = 0; i < listeBoissons.length; i++) {
+      itemTop = i * espaceLigne - tolerance; // Début de l'élément avec tolérance
+      itemBottom = itemTop + espaceLigne + tolerance*2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
       }
-       
-     else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Salade\t1,00€");
-       
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Tomates\t2,00€");
-      
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.PLATS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Plat1\t10,00€");
-       
-        
-      }
-      
-     else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Plat2\t12,00€");
-       
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Plat3\t16,00€");
-       
-      }
-       
-     else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Plat4\t15,00€");
-       
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
-      selectionItem("Plat5\t13,25€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.DESSERTS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Dessert1\t10,00€");
-        
-      }
-      
-     else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Dessert2\t8,00€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Dessert3\t5,00€");
-      }
-       
-     else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Dessert4\t7,00€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
-      selectionItem("Dessert5\t11,00€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.BOISSONS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Boisson1\t2,00€");
-      }
-      
-     else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Boisson2\t5,00€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Boisson3\t1,00€");
-      }
-       
-     else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
-       selectionItem("Boisson4\t0,50€");
-        
-      }
-      
-      else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
-      selectionItem("Boisson5\t0,75€");
-        
-      }
+    }
+    selectionItem(listeBoissons[index]);
+    }
       
 }
