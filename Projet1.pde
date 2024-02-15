@@ -15,7 +15,7 @@ void setup() {
 }
 
 void draw() {
-  background(173, 216, 230); // Définit le fond comme bleu clair
+  background(255);
   drawHeader();
   drawMessages();
   drawBackButton();
