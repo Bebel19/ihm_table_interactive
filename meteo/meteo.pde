@@ -152,13 +152,28 @@ public int getRandomNumber(int min, int max) {
 }
 
 void mousePressed() {
-  System.out.println("x: "+mouseX+"y: "+mouseY);
+  System.out.println("x: " + mouseX + " y: " + mouseY);
   if (mouseX > 0 && mouseX < 200) { // Zone de la barre latérale
-    int index = (mouseY/35); // Décalage 
+    int itemHeight = 35; // Hauteur d'un élément (nom de ville + espace)
+    int tolerance = itemHeight/2; // Tolérance en pixels au-dessus et en dessous de chaque élément
+
+    // Calcul de l'index en tenant compte de la tolérance
+    int index = -1;
+    for (int i = 0; i < villes.length; i++) {
+      int itemTop = i * itemHeight - tolerance; // Début de l'élément avec tolérance
+      int itemBottom = itemTop + itemHeight + tolerance * 2; // Fin de l'élément avec tolérance
+
+      if (mouseY >= itemTop && mouseY <= itemBottom) {
+        index = i;
+        break; // Arrête la boucle une fois l'index trouvé
+      }
+    }
+
     System.out.println(index);
-    if (index >= 0 && index < villes.length) {
+
+    if (index >= 0) {
       villeSelectionnee = villes[index];
-      redraw(); 
+      redraw();
     }
   }
 }
