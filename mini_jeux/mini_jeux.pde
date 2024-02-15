@@ -1,7 +1,7 @@
 import gifAnimation.*;
 Gif gif;
+Gif jeux;
 
-int currentFrame = 0;
 int state,rick;
 String[] noms; // Tableau pour stocker les noms
 PImage img; // Déclaration de la variable pour l'image
@@ -88,17 +88,20 @@ void draw() {
   
   switch (state) {
     case 1:
-      
-      img = loadImage("1.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
-      image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      jeux = new Gif(this, "1.gif");
+      image(jeux, 60, 420, 280, 180);
+      //img = loadImage("1.jpg"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
+      //image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
       if(rick == 1){
         background(255);
         image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
       }
       break;
     case 2:
-      img = loadImage("2.png"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
-      image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
+      jeux = new Gif(this, "2.gif");
+      image(jeux, 60, 420, 280, 180);
+      //img = loadImage("2.png"); // Charger votre image (remplacez "nom_de_votre_image.jpg" par le chemin de votre image)
+      //image(img, 60, 420, 280, 180); // Image aux coordonnées (60, 60) et dimensions 280x180
       if(rick == 1){
         background(255);
         image(gif, 45, 100); // Afficher le GIF à la position (0, 0)
