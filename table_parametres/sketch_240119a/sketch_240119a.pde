@@ -27,36 +27,36 @@ void setup(){
 }
 
 void draw(){
-  background(255); 
+  background(67,185,165); 
   
-  fill(0);
+  fill(255);
   textSize(45);
   text("Paramètres", 250, 90);
   
   image(img, 40,40, 50, 50); 
   
-  creerRectangle("Langues", 0, 255, Langues); 
+  creerRectangle("Langues", 0, Langues); 
   
   if(!LanguesPressed && !LuminositePressed){
-     creerRectangle("Luminosité", 60 ,255, Luminosite); 
-    creerRectangle("WIFI", 120 ,255,WIFI ); 
+     creerRectangle("Luminosité", 60 , Luminosite); 
+    creerRectangle("WIFI", 120 ,WIFI ); 
   }
   
   if(LanguesPressed && !LuminositePressed){
-    creerRectangle("Luminosité", 60 + decalageLangues ,255, Luminosite); 
-    creerRectangle("WIFI", 120 + decalageLangues ,255,WIFI ); 
+    creerRectangle("Luminosité", 60 + decalageLangues , Luminosite); 
+    creerRectangle("WIFI", 120 + decalageLangues ,WIFI ); 
     MenuLangues(); 
   }
   
   if(!LanguesPressed && LuminositePressed){
-    creerRectangle("Luminosité", 60 ,255, Luminosite); 
-    creerRectangle("WIFI", 120 + decalageLuminosite ,255,WIFI ); 
+    creerRectangle("Luminosité", 60 , Luminosite); 
+    creerRectangle("WIFI", 120 + decalageLuminosite ,WIFI ); 
     MenuLuminosite(); 
   }
   
   if(LanguesPressed && LuminositePressed){
-    creerRectangle("Luminosité", 60+decalageLangues ,255, Luminosite); 
-    creerRectangle("WIFI", 120 + decalageLangues+decalageLuminosite ,255,WIFI ); 
+    creerRectangle("Luminosité", 60+decalageLangues , Luminosite); 
+    creerRectangle("WIFI", 120 + decalageLangues+decalageLuminosite,WIFI ); 
     MenuLangues();
     MenuLuminosite(); 
   }
@@ -67,12 +67,12 @@ void draw(){
   
 }
 
-void creerRectangle(String string, int position, int couleur, boolean actif){
-  fill(couleur);
+void creerRectangle(String string, int position, boolean actif){
+  fill(96,178,208);
   if (actif){
-    fill(200); }
+    fill(101,153,172); }
   rect(50, 150+position, 300, 30);
-  fill(0);
+  fill(255);
   textSize(20);
   text(string,65,170+position);
   
@@ -112,7 +112,7 @@ void MenuWIFI() {
 
   fill(0);
   textSize(20);
-  text("Box-203", 75, 330+decalageLangues+decalageLuminosite); 
+  text("SSID : Box-203", 75, 330+decalageLangues+decalageLuminosite); 
   text("Code WIFI : ZDKB 7526 NCJD", 75, 360+decalageLangues+decalageLuminosite);
 }
 
