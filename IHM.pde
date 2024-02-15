@@ -28,7 +28,6 @@ public enum CATEG_STATS {
   PLATS,
   DESSERTS,
   BOISSONS,
-  RETOUR
 }
   color bg=color(34, 38, 41);
   color fondBtn=color(134, 194, 50);
@@ -60,7 +59,6 @@ void affichageTexteTabule(String texte, int xPosMin, int yPos, int xPosMax, colo
   fill(couleur);
   String [] texteScinde=texte.split("\t");
   textAlign(CENTER);
-  System.out.println(texteScinde[0]);
   text(texteScinde[0], xPosMin, yPos, xPosMax, yPos+50);
   text(texteScinde[1], xPosMin+tailleTab, yPos, xPosMax+tailleTab, yPos+50);
 
@@ -282,7 +280,7 @@ void resumee (List<String> selection){
 }
 
 void draw(){
-
+  
   switch (carteStats){
     case INITIAL:
     background(bg);
@@ -361,10 +359,6 @@ void draw(){
    
    case STATS:
    switch(categStats){
-     case RETOUR:
-        
-       carteStats=CARTE_STATS.CARTE;
-       break;
      
      case TOUT:
         background(bg);
@@ -498,7 +492,7 @@ void selectionItem(String texteItem){
     case STATS:
      // Retour
      if (mouseY>=10 && mouseX<=60 && mouseY<=30 ){
-      categStats=CATEG_STATS.RETOUR;
+      carteStats=CARTE_STATS.CARTE;
       System.out.println("test retour stat");
      }
      
@@ -557,8 +551,7 @@ void selectionItem(String texteItem){
     case VALIDER:
      break;
    }
-   System.out.println("X: "+mouseX);
-   System.out.println("Y: "+mouseY);
+   
    // Selection et deselection d'item
    if (categCarte==CATEG_CARTE.PLATJ && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
      selectionItem("Plat du jour\t5,00€");
@@ -566,115 +559,104 @@ void selectionItem(String texteItem){
    
    else if (categCarte==CATEG_CARTE.ENTREES && mouseY>=-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
         selectionItem("Melon\t2,50€");
-        System.out.println("Melon");
+        
       }
       
      else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Jambon blanc\t3,00€");
-       System.out.println("JB");
+      
         
       }
       
       else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Jambon du pays\t3,00€");
-       System.out.println("JP");
+       
       }
        
      else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Salade\t1,00€");
-       System.out.println("Salade");
+       
         
       }
       
       else if (categCarte==CATEG_CARTE.ENTREES &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Tomates\t2,00€");
-       System.out.println("Tomates");
+      
         
       }
       
       else if (categCarte==CATEG_CARTE.PLATS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
        selectionItem("Plat1\t10,00€");
-       System.out.println("Plat1");
+       
         
       }
       
      else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Plat2\t12,00€");
-       System.out.println("Plat2");
+       
         
       }
       
       else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Plat3\t16,00€");
-       System.out.println("Plat3");
+       
       }
        
      else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Plat4\t15,00€");
-       System.out.println("Plat4");
+       
         
       }
       
       else if (categCarte==CATEG_CARTE.PLATS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
       selectionItem("Plat5\t13,25€");
-      System.out.println("Plat5");
         
       }
       
       else if (categCarte==CATEG_CARTE.DESSERTS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
        selectionItem("Dessert1\t10,00€");
-       System.out.println("Dessert1");
         
       }
       
      else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Dessert2\t8,00€");
-       System.out.println("Dessert2");
         
       }
       
       else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Dessert3\t5,00€");
-       System.out.println("Dessert3");
       }
        
      else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Dessert4\t7,00€");
-       System.out.println("Dessert4");
         
       }
       
       else if (categCarte==CATEG_CARTE.DESSERTS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
-      selectionItem("Dessert5\t11€,00");
-      System.out.println("Dessert5");
+      selectionItem("Dessert5\t11,00€");
         
       }
       
       else if (categCarte==CATEG_CARTE.BOISSONS && mouseY>=espaceLigne-20 && mouseX<=735 && mouseY<=espaceLigne+20 && mouseX>=200-20){
        selectionItem("Boisson1\t2,00€");
-       System.out.println("Boisson1"); 
       }
       
      else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=2*espaceLigne-20 && mouseX<=735 && mouseY<=2*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Boisson2\t5,00€");
-       System.out.println("Boisson2");
         
       }
       
       else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=3*espaceLigne-20 && mouseX<=735 && mouseY<=3*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Boisson3\t1,00€");
-       System.out.println("Boisson3");
       }
        
      else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=4*espaceLigne-20 && mouseX<=735 && mouseY<=4*espaceLigne+20 && mouseX>=200-20){
        selectionItem("Boisson4\t0,50€");
-       System.out.println("Boisson4");
         
       }
       
       else if (categCarte==CATEG_CARTE.BOISSONS &&  mouseY>=5*espaceLigne-20 && mouseX<=735 && mouseY<=5*espaceLigne+20 && mouseX>=200-20){
       selectionItem("Boisson5\t0,75€");
-      System.out.println("Boisson5");
         
       }
       
