@@ -154,7 +154,7 @@ void mousePressed(){
   }
     //Vérifier si la souris est sur le bouton Service
   if (mouseX > 500 && mouseX < 600 && mouseY > 100 && mouseY < 220) {
-    System.out.println("Service"); 
+    System.out.println("Service: Appel d'un serveur"); 
   }
     //Vérifier si la souris est sur le bouton Parametres
   if (mouseX > 620 && mouseX < 720 && mouseY > 100 && mouseY < 220 && !paiementOuvert) {
