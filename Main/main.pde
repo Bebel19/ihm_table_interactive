@@ -47,8 +47,6 @@ Gif gif;
 Gif gifJeux1;
 Gif gifJeux2;
 
-//int selectionInt =0; 
-
 void setup(){
   size(900,300); 
   background(255); 
