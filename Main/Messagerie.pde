@@ -25,7 +25,7 @@ public class Messagerie extends PApplet  {
     background(173, 216, 230); // Définit le fond comme bleu clair
     drawHeader();
     drawMessages();
-    drawBackButton();
+   
     if (selectedTable != -1) {
       drawMenu(selectedTable);
       if (isEnteringMessage) {
@@ -66,10 +66,6 @@ public class Messagerie extends PApplet  {
     text(message, x + 60, y + 10);
   }
   
-  void drawBackButton() {
-    imageMode(CENTER);
-    image(retourMsg, 40, 40, 50, 50);
-  }
   
   void drawMenu(int tableNumber) {
     fill(240);
@@ -91,14 +87,9 @@ public class Messagerie extends PApplet  {
   }
   
   void mousePressed() {
-    // Vérifier si le clic est sur le bouton de retour
-    if (dist(mouseX, mouseY, 40, 40) < 25) {
-      selectedTable = -1; // Désélectionne la table actuelle et ferme le menu
-      isEnteringMessage = false; // Désactive la saisie de message
-      currentMessage = ""; // Réinitialise le message en cours
-    }
+    
     // Vérifier si le clic est sur la croix pour fermer l'historique des messages
-    else if (mouseX >= 480 && mouseX <= 500 && mouseY >= 10 && mouseY <= 30 && selectedTable != -1) {
+    if (mouseX >= 480 && mouseX <= 500 && mouseY >= 10 && mouseY <= 30 && selectedTable != -1) {
       selectedTable = -1; // Désélectionne la table actuelle et ferme l'historique des messages
       isEnteringMessage = false;
       currentMessage = "";

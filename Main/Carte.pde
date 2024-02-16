@@ -3,7 +3,7 @@ import processing.core.PImage;
 
 public interface enumerations {
     public enum CARTE_STATS {
-        INITIAL, CARTE, STATS, RESUMEE, VALIDER;
+      CARTE, STATS, RESUMEE, VALIDER;
     }
     
     public enum CATEG_CARTE {
@@ -82,13 +82,6 @@ void ongletsCarte(){
   
   fill(fondOnglet);
   rect(0,40,140, height-100);
-  fill(fondBtn);
-  
-  // Retour
-  rect(0,10,80,30);
-  fill(couleurTexte);
-  textAlign(LEFT,CENTER);
-  text("Retour", 10,10,60,20);
   
   fill(fondBtn);
   
@@ -285,11 +278,7 @@ void resumee (List<String> selection){
 void draw(){
   
   switch (carteStats){
-    case INITIAL:
-    background(bg);
-    exit();
-     break;
-     
+    
      case CARTE:
      
      switch(categCarte){
@@ -416,7 +405,7 @@ void draw(){
    break;
    
    case VALIDER:
-   carteStats=enumerations.CARTE_STATS.INITIAL;
+   
       System.out.println("FIN");
    break;
   }
@@ -436,18 +425,10 @@ void selectionItem(String texteItem){
    
    switch(carteStats){
      
-     case INITIAL:
-     break;
-     
      case CARTE:
-     // Retour
-     if (mouseY>=10 && mouseX<=60 && mouseY<=30 ){
-      carteStats=enumerations.CARTE_STATS.INITIAL;
-      System.out.println("test retour carte");
-     }
      
      // PlatJ
-     else if (mouseY>=60 && mouseX<=140 && mouseY<=(tailleBtn+60)){
+      if (mouseY>=60 && mouseX<=140 && mouseY<=(tailleBtn+60)){
        categCarte=enumerations.CATEG_CARTE.PLATJ;
            System.out.println("test platJ carte");
      }
