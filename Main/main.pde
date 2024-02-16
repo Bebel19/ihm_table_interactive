@@ -122,7 +122,7 @@ void draw(){
   text("Meteo", 290, 115);
   text("Jeux", 415, 115);
   text("Service", 525, 115);
-  text("Paiement", 640, 115);
+  text("Parametres", 635, 115);
 
 
 }
